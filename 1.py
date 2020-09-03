@@ -7,7 +7,7 @@ def outlink():
     try:
         mobilelist = []
         mobile = mobilelist[random.randint(0,2)]
-        pwd = "Qwe905148"#填你的密码
+        pwd = ""#填你的密码
         logindata = {'mobile':mobile,"pwd":pwd}
         headers = {'user-agent': r'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
         }
