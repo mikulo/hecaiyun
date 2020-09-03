@@ -5,23 +5,25 @@ app = Flask(__name__)
 @app.route('/', methods = ["GET"])
 def outlink():
     try:
-        mobile = ""#填你的手机号
-        pwd = ""#填你的密码
+        mobilelist = []
+        mobile = mobilelist[random.randint(0,2)]
+        pwd = "Qwe905148"#填你的密码
         logindata = {'mobile':mobile,"pwd":pwd}
         headers = {'user-agent': r'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
         }
         linkid = request.args.get("id")
+        passwd = request.args.get("passwd")
         url =r"https://qlink.mcloud.139.com/stapi/auth/login"
         login = req.post(url,headers=headers,data=logindata)
         dictid =eval(login.text)
         if dictid['code'] != 0:
             return "内置解析帐号登陆错误!"
         userid  = dictid["data"]["userid"]
-        infodata={'linkId':linkid,'path':'root',"start":"1","end":"15","sortType":"0","sortDr":"1",r"pass":""}
+        infodata={'linkId':linkid,'path':'root',"start":"1","end":"15","sortType":"0","sortDr":"1",r"pass":passwd}
         info = req.post('https://qlink.mcloud.139.com/stapi/outlink/info',data=infodata,headers=headers,cookies=login.cookies)
         infodict= eval(info.text)
         if infodict['code'] != 0:
-            return "获取pcaid错误或者您的id参数有误!"
+            return "文件id或者提取码有误!"
         pcaid = infodict['data']['pCaID']
         coid = infodict['data']['coLst']['outLinkCoInfo']['coID']
         contentIds = pcaid+r"/"+coid
