@@ -1,18 +1,31 @@
 import requests as req
-import random
+import random,re
 from flask import Flask,request,redirect
 app = Flask(__name__)
 @app.route('/', methods = ["GET"])
 def outlink():
     try:
         mobilelist = []
-        mobile = mobilelist[random.randint(0,2)]
+        mobile = mobilelist[random.randint(0,len(mobilelist)-1)]
         pwd = ""#填你的密码
         logindata = {'mobile':mobile,"pwd":pwd}
         headers = {'user-agent': r'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
         }
         linkid = request.args.get("id")
         passwd = request.args.get("passwd")
+        if re.match(r'.{13}', linkid):
+            pass
+        elif linkid == "":
+        	return "文件id为空!"
+        	
+        else:
+            return "文件id格式错误!"
+        if re.match(r'.{4}', passwd):
+    	    pass
+        elif passwd == "":
+            return "文件提取码为空!"
+        else:
+            return "文件提取码错误!"
         url =r"https://qlink.mcloud.139.com/stapi/auth/login"
         login = req.post(url,headers=headers,data=logindata)
         dictid =eval(login.text)
