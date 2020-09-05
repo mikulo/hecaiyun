@@ -16,7 +16,9 @@ def outlink():
         else:
             return "文件id格式错误!"
         if passwd == "":
-    	    pass
+            pass
+        elif passwd is None:
+            passwd = ""
         elif re.match(r'.{4}', passwd):
             pass
         else:
