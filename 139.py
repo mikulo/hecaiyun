@@ -6,7 +6,8 @@ app = Flask(__name__)
 def outlink():
     try:
         mobilelist = []
-        mobile = mobilelist[random.randint(0,len(mobilelist)-1)]
+        num = random.randint(0,len(mobilelist)-1)
+        mobile = mobilelist[num]
         pwd = ""#填你的密码
         logindata = {'mobile':mobile,"pwd":pwd}
         headers = {'user-agent': r'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
@@ -30,7 +31,7 @@ def outlink():
         login = req.post(url,headers=headers,data=logindata)
         dictid =eval(login.text)
         if dictid['code'] != 0:
-            return "内置解析帐号登陆错误!"
+            return "内置解析帐号"+str(num+1)+"登陆错误!"
         userid  = dictid["data"]["userid"]
         infodata={'linkId':linkid,'path':'root',"start":"1","end":"15","sortType":"0","sortDr":"1",r"pass":passwd}
         info = req.post('https://qlink.mcloud.139.com/stapi/outlink/info',data=infodata,headers=headers,cookies=login.cookies)
