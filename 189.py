@@ -15,12 +15,12 @@ def outlink():
         	
         else:
             return "文件id格式错误!"
-        if re.match(r'.{4}', passwd):
+        if passwd == ":
     	    pass
-        elif passwd == "":
+        elif "re.match(r'.{4}', passwd):
             pass
         else:
-            return "文件提取码错误!"        
+            return "文件提取码错误!"            
         headers = {'user-agent': r'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'}
         if isfloder == "1":
             url = r'https://cloud.189.cn/t/'+shareid
