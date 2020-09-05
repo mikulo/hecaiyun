@@ -21,10 +21,12 @@ def outlink():
         	
         else:
             return "文件id格式错误!"
-        if re.match(r'.{4}', passwd):
-    	    pass
-        elif passwd == "":
-            return "文件提取码为空!"
+        if passwd == "":
+            pass
+        elif passwd is None:
+            passwd = ""
+        elif re.match(r'.{4}', passwd):
+            pass
         else:
             return "文件提取码错误!"
         url =r"https://qlink.mcloud.139.com/stapi/auth/login"
